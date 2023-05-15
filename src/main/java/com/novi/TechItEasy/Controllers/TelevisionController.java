@@ -56,44 +56,16 @@ public class TelevisionController {
 //        return ResponseEntity.created(uri).body(television);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Object> updateTv(@PathVariable Long id, @RequestBody Television television) {
-//        Optional<Television> optionalTelevision = televisionRepository.findById(id);
-//        if(optionalTelevision.isEmpty()) {
-//            throw new RecordNotFoundException("No television found with id: " + id);
-//        }
-//        Television updateTelevision = optionalTelevision.get();
-//        updateTelevision.setType(television.getType());
-//        updateTelevision.setBrand(television.getBrand());
-//        updateTelevision.setName(television.getName());
-//        updateTelevision.setPrice(television.getPrice());
-//        updateTelevision.setAvailableSize(television.getAvailableSize());
-//        updateTelevision.setRefreshRate(television.getRefreshRate());
-//        updateTelevision.setScreenType(television.getScreenType());
-//        updateTelevision.setScreenQuality(television.getScreenQuality());
-//        updateTelevision.setSmartTv(television.getSmartTv());
-//        updateTelevision.setWifi(television.getWifi());
-//        updateTelevision.setVoiceControl(television.getVoiceControl());
-//        updateTelevision.setHdr(television.getHdr());
-//        updateTelevision.setBluetooth(television.getBluetooth());
-//        updateTelevision.setAmbilight(television.getAmbilight());
-//        updateTelevision.setOriginalStock(television.getOriginalStock());
-//        updateTelevision.setSold(television.getSold());
-//
-//        Television editedTelevision = televisionRepository.save(updateTelevision);
-//
-//        return ResponseEntity.ok().body(editedTelevision);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Object> deleteTV(@PathVariable Long id) {
-//        Optional<Television> optionalTelevision = televisionRepository.findById(id);
-//        if(optionalTelevision.isEmpty()) {
-//            throw new RecordNotFoundException("No television found with id: " + id);
-//        }
-//        televisionRepository.deleteById(id);
-//
-//        return ResponseEntity.noContent().build();
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateTv(@PathVariable Long id, @RequestBody TelevisionInputDto televisionInputDto) {
+        TelevisionDto televisionDto = televisionService.updateTelevision(id, televisionInputDto);
+        return ResponseEntity.ok().body(televisionDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteTV(@PathVariable Long id) {
+        televisionService.deleteTelevision(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

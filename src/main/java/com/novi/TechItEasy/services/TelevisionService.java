@@ -5,6 +5,7 @@ import com.novi.TechItEasy.dtos.TelevisionDto;
 import com.novi.TechItEasy.dtos.TelevisionInputDto;
 import com.novi.TechItEasy.models.Television;
 import com.novi.TechItEasy.repositories.TelevisionRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class TelevisionService {
     }
 
     public List<TelevisionDto> getAllTelevisions() {
-        Iterable<Television> televisions = televisionRepository.findAll();
+        Iterable<Television> televisions = televisionRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         List<TelevisionDto> televisionDtos = new ArrayList<>();
 
         for (Television tv: televisions) {
@@ -52,6 +53,28 @@ public class TelevisionService {
         return transferTelevisionToDto(television);
     }
 
+    public TelevisionDto updateTelevision(Long id, TelevisionInputDto televisionInputDto) {
+        Optional<Television> optionalTelevision = televisionRepository.findById(id);
+        if(optionalTelevision.isEmpty()) {
+            throw new RecordNotFoundException("No television found with id: " + id);
+        }
+
+        Television updateTelevision = transferDtoToTelevision(televisionInputDto);
+        //set id toegevoegd omdat je deze anders in de URL én in de JSON toe moet voegen (dubbel werk)
+        updateTelevision.setId(id);
+        televisionRepository.save(updateTelevision);
+
+        return transferTelevisionToDto(updateTelevision);
+    }
+
+    public void deleteTelevision(Long id) {
+        Optional<Television> optionalTelevision = televisionRepository.findById(id);
+        if(optionalTelevision.isEmpty()) {
+            throw new RecordNotFoundException("No television found with id: " + id);
+        }
+        televisionRepository.deleteById(id);
+    }
+
     // voor GET requests
     public TelevisionDto transferTelevisionToDto(Television tv) {
         TelevisionDto televisionDto = new TelevisionDto();
@@ -81,7 +104,8 @@ public class TelevisionService {
     public Television transferDtoToTelevision(TelevisionInputDto televisionInputDto) {
         Television television = new Television();
 
-        television.setId(televisionInputDto.id);
+        // geen setId nodig, genereert de database of staat in de URL
+        // television.setId(televisionInputDto.id);
         television.setType(televisionInputDto.type);
         television.setBrand(televisionInputDto.brand);
         television.setName(televisionInputDto.name);
