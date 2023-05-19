@@ -24,7 +24,7 @@ public class RemoteController {
 
     /* relations */
     @OneToOne(mappedBy = "remoteController")
-    @JsonIgnoreProperties({"television"})
+    @JsonIgnore
     private Television television;
 
 }

@@ -17,3 +17,15 @@ VALUES ('903226', 'Samsung', 'Samsung QLED 65Q74B', 1499, 65, 100, 'LED-LCD', 'G
        ('925022', 'Philips', 'Philips The One 43PUS8837', 699, 43, 100, 'LED-LCD', 'Goed', true, true, true, true, true, true, 20, 5),
        ('906264', 'Sony', 'Sony Bravia KD-43X85KP', 648, 43, 100, 'LED-LCD', 'Goed', true, true, true, true, true, false, 15, 3),
        ('903314', 'LG', 'LG OLED42C24LA (2022)', 1099, 42, 100, 'OLED', 'Uitstekend', true, true, true, true, true, false, 12, 6);
+
+UPDATE ci_modules
+SET television_id = 1
+WHERE id = 1;
+
+UPDATE ci_modules
+SET television_id = 1
+WHERE id = 2;
+
+UPDATE televisions
+SET remote_controller_id = 1
+WHERE id = 1;

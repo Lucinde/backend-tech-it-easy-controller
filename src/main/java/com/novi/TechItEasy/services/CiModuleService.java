@@ -120,9 +120,11 @@ public class CiModuleService {
     public CiModuleDto transferCiModuleToDto(CiModule ciModule) {
         CiModuleDto ciModuleDto = new CiModuleDto();
 
+        ciModuleDto.id = ciModule.getId();
         ciModuleDto.type = ciModule.getType();
         ciModuleDto.name = ciModule.getName();
         ciModuleDto.price = ciModule.getPrice();
+        ciModuleDto.television = ciModule.getTelevision();
 
         return ciModuleDto;
     }
