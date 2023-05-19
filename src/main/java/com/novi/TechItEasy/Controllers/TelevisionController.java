@@ -62,6 +62,12 @@ public class TelevisionController {
         return ResponseEntity.ok().body(televisionDto);
     }
 
+    @PutMapping("/{id}/remote/{remote_id}")
+    public ResponseEntity<TelevisionDto> assignRemoteToTelevision(@PathVariable Long id, @PathVariable Long remote_id) {
+        return ResponseEntity.ok().body(televisionService.assignRemoteControllerToTelevision(id, remote_id));
+
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteTV(@PathVariable Long id) {
         televisionService.deleteTelevision(id);

@@ -1,5 +1,6 @@
 package com.novi.TechItEasy.dtos;
 
+import com.novi.TechItEasy.models.RemoteController;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
@@ -25,4 +26,5 @@ public class TelevisionInputDto {
     public Boolean ambilight;
     public int originalStock;
     public int sold;
+    public RemoteController remoteController;
 }

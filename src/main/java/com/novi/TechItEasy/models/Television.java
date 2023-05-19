@@ -1,16 +1,15 @@
 package com.novi.TechItEasy.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name="televisions")
 public class Television {
     /* variables */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String type;
@@ -30,17 +29,33 @@ public class Television {
     private int originalStock;
     private int sold;
 
+    /* relations */
+    @OneToOne
+    private RemoteController remoteController;
+
+    @OneToMany(mappedBy = "television")
+    private List<CiModule> ciModule;
+
+    @ManyToMany
+    @JoinTable(
+            name = "televisions_wallbrackets",
+            joinColumns = @JoinColumn(name = "television_id"),
+            inverseJoinColumns = @JoinColumn(name = "wallbracket_id")
+    )
+    private List<WallBracket> wallBrackets;
+
     /* constructors */
-
-    public Television() {
-    }
-
-    public Television(String type, String brand, String name, double price) {
-        this.type = type;
-        this.brand = brand;
-        this.name = name;
-        this.price = price;
-    }
+    /* deze mogen verwijderd worden, dan vult Spring Boot ze automatisch */
+//
+//    public Television() {
+//    }
+//
+//    public Television(String type, String brand, String name, double price) {
+//        this.type = type;
+//        this.brand = brand;
+//        this.name = name;
+//        this.price = price;
+//    }
 
     /* getters & setters */
 
@@ -178,5 +193,13 @@ public class Television {
 
     public void setSold(int sold) {
         this.sold = sold;
+    }
+
+    public RemoteController getRemoteController() {
+        return remoteController;
+    }
+
+    public void setRemoteController(RemoteController remoteController) {
+        this.remoteController = remoteController;
     }
 }
