@@ -1,5 +1,6 @@
 package com.novi.TechItEasy.dtos;
 
+import com.novi.TechItEasy.models.Television;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
@@ -13,4 +14,5 @@ public class RemoteControllerInputDto {
     @Min(1)
     public double price;
     public int originalStock;
+    public Television television;
 }

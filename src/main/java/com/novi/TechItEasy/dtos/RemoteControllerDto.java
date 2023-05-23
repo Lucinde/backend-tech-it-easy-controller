@@ -1,5 +1,7 @@
 package com.novi.TechItEasy.dtos;
 
+import com.novi.TechItEasy.models.Television;
+
 public class RemoteControllerDto {
     public Long id;
 
@@ -9,4 +11,5 @@ public class RemoteControllerDto {
     public String brand;
     public double price;
     public int originalStock;
+    public Television television;
 }

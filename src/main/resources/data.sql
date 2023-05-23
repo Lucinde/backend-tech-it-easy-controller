@@ -27,5 +27,13 @@ SET television_id = 1
 WHERE id = 2;
 
 UPDATE televisions
-SET remote_controller_id = 1
+SET remote_controller_id = 3
 WHERE id = 1;
+
+UPDATE televisions
+SET remote_controller_id = 2
+WHERE id = 2;
+
+UPDATE televisions
+SET remote_controller_id = 1
+WHERE id = 3;
