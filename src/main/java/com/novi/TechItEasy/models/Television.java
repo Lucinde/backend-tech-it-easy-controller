@@ -202,4 +202,20 @@ public class Television {
     public void setRemoteController(RemoteController remoteController) {
         this.remoteController = remoteController;
     }
+
+    public List<CiModule> getCiModule() {
+        return ciModule;
+    }
+
+    public void setCiModule(List<CiModule> ciModule) {
+        this.ciModule = ciModule;
+    }
+
+    public List<WallBracket> getWallBrackets() {
+        return wallBrackets;
+    }
+
+    public void setWallBrackets(List<WallBracket> wallBrackets) {
+        this.wallBrackets = wallBrackets;
+    }
 }

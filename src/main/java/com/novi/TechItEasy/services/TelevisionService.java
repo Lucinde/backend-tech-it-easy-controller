@@ -5,8 +5,10 @@ import com.novi.TechItEasy.dtos.TelevisionDto;
 import com.novi.TechItEasy.dtos.TelevisionInputDto;
 import com.novi.TechItEasy.models.RemoteController;
 import com.novi.TechItEasy.models.Television;
+import com.novi.TechItEasy.models.WallBracket;
 import com.novi.TechItEasy.repositories.RemoteControllerRepository;
 import com.novi.TechItEasy.repositories.TelevisionRepository;
+import com.novi.TechItEasy.repositories.WallBracketRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +20,12 @@ import java.util.Optional;
 public class TelevisionService {
     private final TelevisionRepository televisionRepository;
     private final RemoteControllerRepository remoteControllerRepository;
+    private final WallBracketRepository wallBracketRepository;
 
-    public TelevisionService(TelevisionRepository televisionRepository, RemoteControllerRepository remoteControllerRepository) {
+    public TelevisionService(TelevisionRepository televisionRepository, RemoteControllerRepository remoteControllerRepository, WallBracketRepository wallBracketRepository) {
         this.televisionRepository = televisionRepository;
         this.remoteControllerRepository = remoteControllerRepository;
+        this.wallBracketRepository = wallBracketRepository;
     }
 
     public List<TelevisionDto> getAllTelevisions() {
@@ -97,6 +101,25 @@ public class TelevisionService {
         // de television opslaan in de repos
         televisionRepository.save(television);
 
+        return transferTelevisionToDto(television);
+    }
+
+    public TelevisionDto assignWallBracketToTelevision(Long id, Long wallBracket_id) {
+        Optional<Television> optionalTelevision = televisionRepository.findById(id);
+        Optional<WallBracket> optionalWallBracket = wallBracketRepository.findById(wallBracket_id);
+        if(optionalTelevision.isEmpty()) {
+            throw new RecordNotFoundException("No television found with id: " + id);
+        }
+        if(optionalWallBracket.isEmpty()) {
+            throw new RecordNotFoundException("No wall bracket found with id: " + id);
+        }
+
+        Television television = optionalTelevision.get();
+        WallBracket wallBracket = optionalWallBracket.get();
+        List<WallBracket> wallBracketList = television.getWallBrackets();
+        wallBracketList.add(wallBracket);
+        television.setWallBrackets(wallBracketList);
+        televisionRepository.save(television);
         return transferTelevisionToDto(television);
     }
 

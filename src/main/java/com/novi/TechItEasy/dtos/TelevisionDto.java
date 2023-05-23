@@ -1,6 +1,9 @@
 package com.novi.TechItEasy.dtos;
 
 import com.novi.TechItEasy.models.RemoteController;
+import com.novi.TechItEasy.models.WallBracket;
+
+import java.util.List;
 
 // Voor GET en het returnen van televisies
 public class TelevisionDto {
@@ -24,4 +27,5 @@ public class TelevisionDto {
     public int sold;
 
     public RemoteController remoteController;
+
 }
