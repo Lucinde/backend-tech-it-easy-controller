@@ -1,4 +1,4 @@
-package com.novi.TechItEasy.Exceptions;
+package com.novi.TechItEasy.exceptions;
 
 public class RecordNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 1L;

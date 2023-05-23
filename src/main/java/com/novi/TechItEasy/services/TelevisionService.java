@@ -1,6 +1,6 @@
 package com.novi.TechItEasy.services;
 
-import com.novi.TechItEasy.Exceptions.RecordNotFoundException;
+import com.novi.TechItEasy.exceptions.RecordNotFoundException;
 import com.novi.TechItEasy.dtos.TelevisionDto;
 import com.novi.TechItEasy.dtos.TelevisionInputDto;
 import com.novi.TechItEasy.models.RemoteController;

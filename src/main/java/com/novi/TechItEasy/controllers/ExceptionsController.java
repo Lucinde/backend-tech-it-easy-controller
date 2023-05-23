@@ -1,6 +1,6 @@
-package com.novi.TechItEasy.Controllers;
+package com.novi.TechItEasy.controllers;
 
-import com.novi.TechItEasy.Exceptions.RecordNotFoundException;
+import com.novi.TechItEasy.exceptions.RecordNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

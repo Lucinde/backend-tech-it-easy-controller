@@ -1,9 +1,7 @@
-package com.novi.TechItEasy.Controllers;
+package com.novi.TechItEasy.controllers;
 
-import com.novi.TechItEasy.Exceptions.RecordNotFoundException;
 import com.novi.TechItEasy.dtos.TelevisionDto;
 import com.novi.TechItEasy.dtos.TelevisionInputDto;
-import com.novi.TechItEasy.models.Television;
 import com.novi.TechItEasy.services.TelevisionService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

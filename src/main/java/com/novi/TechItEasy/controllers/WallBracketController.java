@@ -1,4 +1,4 @@
-package com.novi.TechItEasy.Controllers;
+package com.novi.TechItEasy.controllers;
 
 import com.novi.TechItEasy.dtos.WallBracketDto;
 import com.novi.TechItEasy.dtos.WallBracketInputDto;

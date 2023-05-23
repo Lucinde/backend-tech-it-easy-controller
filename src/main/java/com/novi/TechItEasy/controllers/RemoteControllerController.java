@@ -1,9 +1,7 @@
-package com.novi.TechItEasy.Controllers;
+package com.novi.TechItEasy.controllers;
 
 import com.novi.TechItEasy.dtos.RemoteControllerDto;
 import com.novi.TechItEasy.dtos.RemoteControllerInputDto;
-import com.novi.TechItEasy.dtos.TelevisionDto;
-import com.novi.TechItEasy.dtos.TelevisionInputDto;
 import com.novi.TechItEasy.services.RemoteControllerService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
