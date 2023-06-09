@@ -37,3 +37,6 @@ WHERE id = 2;
 UPDATE televisions
 SET remote_controller_id = 1
 WHERE id = 3;
+
+INSERT INTO users (username, password, enabled, apikey, email) VALUES ('henk', 'password', true, '7847493', 'test@testy.nl');
+INSERT INTO authorities (username, authority) VALUES ('henk', 'ROLE_ADMIN');
