@@ -1,9 +1,7 @@
-package com.novi.TechItEasy.Controllers;
+package com.novi.TechItEasy.controllers;
 
-import com.novi.TechItEasy.Exceptions.RecordNotFoundException;
 import com.novi.TechItEasy.dtos.TelevisionDto;
 import com.novi.TechItEasy.dtos.TelevisionInputDto;
-import com.novi.TechItEasy.models.Television;
 import com.novi.TechItEasy.services.TelevisionService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +58,17 @@ public class TelevisionController {
     public ResponseEntity<Object> updateTv(@PathVariable Long id, @RequestBody TelevisionInputDto televisionInputDto) {
         TelevisionDto televisionDto = televisionService.updateTelevision(id, televisionInputDto);
         return ResponseEntity.ok().body(televisionDto);
+    }
+
+    @PutMapping("/{id}/remote/{remote_id}")
+    public ResponseEntity<TelevisionDto> assignRemoteToTelevision(@PathVariable Long id, @PathVariable Long remote_id) {
+        return ResponseEntity.ok().body(televisionService.assignRemoteControllerToTelevision(id, remote_id));
+
+    }
+
+    @PutMapping("/{id}/wallbracket/{wallbracket_id}")
+    public ResponseEntity<TelevisionDto> assignWallBracketToTelevision(@PathVariable Long id, @PathVariable Long wallbracket_id) {
+        return ResponseEntity.ok(televisionService.assignWallBracketToTelevision(id, wallbracket_id));
     }
 
     @DeleteMapping("/{id}")
