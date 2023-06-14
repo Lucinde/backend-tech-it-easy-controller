@@ -6,6 +6,7 @@ import com.novi.TechItEasy.models.Authority;
 import com.novi.TechItEasy.models.User;
 import com.novi.TechItEasy.repositories.UserRepository;
 import com.novi.TechItEasy.utils.RandomStringGenerator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,9 +17,14 @@ import java.util.Set;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    // Gekozen om de passwordencoder een eigen klasse te geven zodat ik geen Autowired hoef toe te voegen (in de rest van het project is hier ook telkens omheen gewerkt dus 'zonde' om dat hier dan niet te doen)
+//    @Autowired
+//    @Lazy //om de loop te voorkomen, deze kan niet in de constructor komen ivm de loop en autowiring etc.
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<UserDto> getUsers() {
@@ -48,6 +54,8 @@ public class UserService {
     public String createUser(UserDto userDto) {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
+        //passwordencoder voeg ik to in toUser-methode waardoor onderstaande regel kan vervallen
+        //passwordEncoder.encode(userDto.password);
         User newUser = userRepository.save(toUser(userDto));
         return newUser.getUsername();
     }
@@ -59,7 +67,7 @@ public class UserService {
     public void updateUser(String username, UserDto newUser) {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepository.findById(username).get();
-        user.setPassword(newUser.getPassword());
+        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         userRepository.save(user);
     }
 
@@ -105,7 +113,7 @@ public class UserService {
         var user = new User();
 
         user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEnabled(userDto.getEnabled());
         user.setApikey(userDto.getApikey());
         user.setEmail(userDto.getEmail());

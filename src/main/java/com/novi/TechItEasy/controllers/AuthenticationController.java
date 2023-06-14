@@ -2,15 +2,15 @@ package com.novi.TechItEasy.controllers;
 
 import com.novi.TechItEasy.payload.AuthenticationRequest;
 import com.novi.TechItEasy.payload.AuthenticationResponse;
+import com.novi.TechItEasy.services.CustomUserDetailsService;
 import com.novi.TechItEasy.utils.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -22,14 +22,18 @@ public class AuthenticationController {
     /*inject authentionManager, userDetailService en jwtUtil*/
 
     private final AuthenticationManager authenticationManager;
-    private final UserDetailsService userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
 
-    public AuthenticationController(AuthenticationManager authenticationManager, UserDetailsService userDetailsService, JwtUtil jwtUtil) {
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthenticationController(AuthenticationManager authenticationManager, CustomUserDetailsService userDetailsService, JwtUtil jwtUtil, PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
         this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
     }
+
 
     /*
          Deze methode geeft de principal (basis user gegevens) terug van de ingelogde gebruiker
