@@ -1,5 +1,6 @@
 package com.novi.TechItEasy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class Television {
     private RemoteController remoteController;
 
     @OneToMany(mappedBy = "television")
+    @JsonIgnore
     private List<CiModule> ciModule;
 
     @ManyToMany

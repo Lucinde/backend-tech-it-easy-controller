@@ -68,7 +68,7 @@ public class TelevisionService {
         }
 
         Television updateTelevision = transferDtoToTelevision(televisionInputDto);
-        //set id toegevoegd omdat je deze anders in de URL én in de JSON toe moet voegen (dubbel werk)
+        //set id toegevoegd omdat je deze anders in de URL én in de JSON toe moet voegen (dubbel werk en meer kans op fouten)
         updateTelevision.setId(id);
         televisionRepository.save(updateTelevision);
 
